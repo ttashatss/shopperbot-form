@@ -17,7 +17,12 @@ export default function Home() {
 
     if (liff.isLoggedIn()) {
       liff.getProfile();
-      window.location.replace("https://docs.google.com/forms/d/e/1FAIpQLSfcS-o54-Odj7VwsLaQINfkJrVYF7uDtZmGVvS4ZVMggTIvGw/viewform?usp=pp_url&entry.257896725=test&entry.100609219=test2");
+      const url = 
+        "https://docs.google.com/forms/d/e/1FAIpQLSfcS-o54-Odj7VwsLaQINfkJrVYF7uDtZmGVvS4ZVMggTIvGw/viewform?usp=pp_url&entry.257896725="
+        + liff.getProfile.userId
+        + "&entry.100609219="
+        + liff.getProfile.displayName
+      window.location.replace(url);
     } else {
       liff.login();
     }
