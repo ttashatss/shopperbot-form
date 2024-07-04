@@ -10,18 +10,18 @@ export default function Home() {
     const liff = (await import("@line/liff")).default;
     try {
       await liff.init({liffId});
-      console.log("liff init success");
     } catch (error) {
       console.error("liff init error", error.message);
     }
 
     if (liff.isLoggedIn()) {
-      liff.getProfile();
+      const {userId, displayName} = await liff.getProfile();
+      
       const url = 
         "https://docs.google.com/forms/d/e/1FAIpQLSfcS-o54-Odj7VwsLaQINfkJrVYF7uDtZmGVvS4ZVMggTIvGw/viewform?usp=pp_url&entry.257896725="
-        + liff.getProfile.userId
+        + userId //currently says undefied on GG form
         + "&entry.100609219="
-        + liff.getProfile.displayName
+        + displayName //currently says undefied on GG form
       window.location.replace(url);
     } else {
       liff.login();
@@ -40,14 +40,7 @@ export default function Home() {
       <main></main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
+        <a>By ShopperBot</a>
       </footer>
 
       <style jsx>{`
